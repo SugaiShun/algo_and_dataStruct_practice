@@ -1,3 +1,6 @@
+def sample(input_data):
+    return "test"
+
 if __name__ == "__main__":
     '''
     数値を標準入力で連続で受け取るメインプログラム
@@ -12,6 +15,6 @@ if __name__ == "__main__":
         else:
             input_data.append(int(tmp))
     
-    output = problem_2_5(input_data)
+    output = (input_data)
 
     print(output)    

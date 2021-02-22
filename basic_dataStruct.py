@@ -16,6 +16,8 @@ class stack:
         return self.stack==[]
     def size(self):
         return len(self.stack)
+    def top(self):
+        return self.stack[-1]
 
 class queue:
     """
