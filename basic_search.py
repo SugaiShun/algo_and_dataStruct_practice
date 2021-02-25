@@ -6,7 +6,12 @@ Binary Search
 Hash Search
 """
 
-def _LinearSearch(inputs,key):
+def LinearSearch(inputs,key):
+"""
+LineraSearch(inputs,key)
+ipnuts:list
+key:search key
+"""
     inputs.append(key)
     index=0
     while inputs[index]!=key:
@@ -16,14 +21,23 @@ def _LinearSearch(inputs,key):
 
     return index
 
-def LinearSearch(input1,input2):
-    
-    cnt=0
-    for key in input2:
-        if _LinearSearch(input1,key)!=None:
-            cnt+=1
+def BinarySearch(inputs,key):
+"""
+BinarySearch(inputs,key)
+ipnuts:list
+key:search key
+"""
 
-    return cnt
+    left = 0
+    right = len(inputs)
+    while left<right:
+        mid = int((left + right)/2)
+        if inputs[mid] == key:
+            return mid
+        elif inputs[mid] < key:
+            left = mid + 1
+        else:
+            right = mid
 
 
 if __name__ == "__main__":
@@ -48,6 +62,13 @@ if __name__ == "__main__":
         else:
             input_data2.append(int(tmp))
     
-    output = LinearSearch(input_data1,input_data2)
+    cnt = 0
+    for key in input_data2:
+        # if LinearSearch(input_data1,key)!=None:
+        #     cnt+=1
 
-    print(output)    
+        input_data1.sort()
+        if BinarySearch(input_data1,key)!=None:
+            cnt+=1
+
+    print(str(cnt))
