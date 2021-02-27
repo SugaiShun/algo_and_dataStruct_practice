@@ -7,11 +7,11 @@ Hash Search
 """
 
 def LinearSearch(inputs,key):
-"""
-LineraSearch(inputs,key)
-ipnuts:list
-key:search key
-"""
+    """
+    LineraSearch(inputs,key)
+    ipnuts:list
+    key:search key
+    """
     inputs.append(key)
     index=0
     while inputs[index]!=key:
@@ -22,12 +22,11 @@ key:search key
     return index
 
 def BinarySearch(inputs,key):
-"""
-BinarySearch(inputs,key)
-ipnuts:list
-key:search key
-"""
-
+    """
+    BinarySearch(inputs,key)
+    ipnuts:list
+    key:search key
+    """
     left = 0
     right = len(inputs)
     while left<right:
@@ -39,6 +38,39 @@ key:search key
         else:
             right = mid
 
+HASHSIZE = 10
+H = [None]*10
+def _h1(key):
+    return key%HASHSIZE
+def _h2(key):
+    return 1+key%(HASHSIZE-1)
+def HashInsert(inputs):
+    """
+    HashInsert(inputs) Open Address 
+    ipnuts:list
+    """
+    for key in inputs:
+        i = 0
+        while(1):
+            h = (_h1(key) + i * _h2(key) ) % HASHSIZE
+            if H[h] == None:
+                H[h] = key
+                break
+            i+=1
+
+def HashSearch(key):
+    """
+    HashSearch(key) Open Address
+    key:int
+    """
+    i = 0
+    while(1):
+        h = (_h1(key) + i * _h2(key) ) % HASHSIZE
+        if H[h] == key:
+            return h
+        elif H[h] == None:
+            return None
+        i+=1
 
 if __name__ == "__main__":
     '''
@@ -61,14 +93,21 @@ if __name__ == "__main__":
             break
         else:
             input_data2.append(int(tmp))
-    
+
+    HashInsert(input_data1)
+
     cnt = 0
     for key in input_data2:
         # if LinearSearch(input_data1,key)!=None:
         #     cnt+=1
 
-        input_data1.sort()
-        if BinarySearch(input_data1,key)!=None:
+        # input_data1.sort()
+        # if BinarySearch(input_data1,key)!=None:
+        #     cnt+=1
+
+        index = HashSearch(key)
+        if index!=None:
+            print(index)
             cnt+=1
 
     print(str(cnt))
