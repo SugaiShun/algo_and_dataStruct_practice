@@ -27,43 +27,48 @@ P=10
 1secで処理すること
 """
 import basic_search as search
-
+import random
+import datetime
+import time
 
 def check(weights,k,p):
-    n = len(input_weights)
+    n = len(weights)
     i = 0
     for j in range(k):
         s = 0
-        while s + input_weights[i] <= p:
-            s += input_weights[i]
+        while s + weights[i] <= p:
+            s += weights[i]
             i += 1
             if i == n:
                 return n
     return i
 
+if __name__ == "__main__":
+    max_v = 100
+    n = 100000
+    k = 100
 
-print("k=",end="")
-k = int(input())
-print("Please input weights. if you completed inputs, you type \"end\".")
+    # 重複なしの整数データ
+    input_data = [ random.randint(0,max_v) for i in range(n) ]
+    # random.sample(range(max_v), k=n)
 
-input_weights = []
-while(1):
-    tmp = input()
-    if tmp == "end":
-        break
-    else:
-        input_weights.append(int(tmp))
+    print("start time: {}".format(datetime.datetime.now()))
+    time1 = time.perf_counter()
 
-right = 100000
-left = 0
-n = len(input_weights)
-while (right-left) > 1:
-    p = int((left + right)/2)
-    if check(input_weights,k,p) >= n:
-        right = p
-    else:
-        left = p
+    right = 100000
+    left = 0
+    n = len(input_data)
+    while (right-left) > 1:
+        p = int((left + right)/2)
+        if check(input_data,k,p) >= n:
+            right = p
+        else:
+            left = p
+    time2 = time.perf_counter()
+    print("p="+str(right))
+    print("elapsed time: {} [ms]".format((time2-time1)*1000))
 
-print("p="+str(right))
+    
+
 
 
