@@ -55,7 +55,7 @@ if __name__ == "__main__":
     print("start time: {}".format(datetime.datetime.now()))
     time1 = time.perf_counter()
 
-    right = 100000
+    right = 100000*100000
     left = 0
     n = len(input_data)
     while (right-left) > 1:
