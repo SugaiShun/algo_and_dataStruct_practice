@@ -32,6 +32,19 @@ def mergeSort(data,left,right):
         mergeSort(data,mid,right)
         merge(data,left,right)
 
+def partition(data,p,r):
+    x = data[r]
+    i = p - 1
+    for j in range(p,r-1):
+        if data[j] <= x:
+            i += 1
+            t = data[i]
+            data[i] = data[j]
+            data[j] = t
+    data[x] = data[i+1]
+    data[i+1] = x
+    return i+1
+
 if __name__ == "__main__":
     print("Input Sequence A. if you completed inputs, you type \"end\".")
     input_data = []
@@ -42,6 +55,8 @@ if __name__ == "__main__":
         else:
             input_data.append(int(tmp))
 
-    mergeSort(input_data,0,len(input_data))
+    # mergeSort(input_data,0,len(input_data))
+    i = partition(input_data,0,len(input_data)-1)
 
     print(input_data)
+    print(i)
