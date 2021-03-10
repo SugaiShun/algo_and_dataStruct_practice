@@ -35,15 +35,22 @@ def mergeSort(data,left,right):
 def partition(data,p,r):
     x = data[r]
     i = p - 1
-    for j in range(p,r-1):
+    for j in range(p,r):
         if data[j] <= x:
             i += 1
             t = data[i]
             data[i] = data[j]
             data[j] = t
-    data[x] = data[i+1]
-    data[i+1] = x
+    t = data[i+1]
+    data[i+1] = data[r]
+    data[r] = t
     return i+1
+
+def quickSort(data,p,r):
+    if p < r:
+        q = partition(data,p,r)
+        quickSort(data,p,q-1)
+        quickSort(data,q+1,r)
 
 if __name__ == "__main__":
     print("Input Sequence A. if you completed inputs, you type \"end\".")
@@ -56,7 +63,10 @@ if __name__ == "__main__":
             input_data.append(int(tmp))
 
     # mergeSort(input_data,0,len(input_data))
-    i = partition(input_data,0,len(input_data)-1)
-
+    # print(input_data)
+    # i = partition(input_data,0,len(input_data)-1)
+    # print(input_data)
+    # print(i)
+    quickSort(input_data,0,len(input_data)-1)
     print(input_data)
-    print(i)
+
