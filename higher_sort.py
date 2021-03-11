@@ -1,9 +1,9 @@
 """
 Sort Problem
 1. Merge Sort -> mergeSort(data:list,left-index:int,right-index:int)
-2. Partition
-3. Quick Sort
-4. Counting Sort
+2. Partition -> partition(data:list,left-index:int,right-index:int)
+3. Quick Sort -> quickSort(data:list,left-index:int,right-index:int)
+4. Counting Sort -> countingSort(data:list, k:int):return sorted list
 """
 
 def merge(data,left,right):
@@ -52,6 +52,25 @@ def quickSort(data,p,r):
         quickSort(data,p,q-1)
         quickSort(data,q+1,r)
 
+def countingSort(data,k):
+    C = [0]*k
+    B = [0]*(len(data)+1)
+
+    data.insert(0,0)
+
+    for i in range(1,len(data)):
+        C[data[i]]+=1
+    for j in range(1,k):
+        C[j] = C[j] + C[j-1]
+    for i in reversed(range(1,len(data))):
+        B[C[data[i]]] = data[i]
+        C[data[i]] -= 1
+    
+    data.pop(0)
+    B.pop(0)
+
+    return B
+
 if __name__ == "__main__":
     print("Input Sequence A. if you completed inputs, you type \"end\".")
     input_data = []
@@ -67,6 +86,8 @@ if __name__ == "__main__":
     # i = partition(input_data,0,len(input_data)-1)
     # print(input_data)
     # print(i)
-    quickSort(input_data,0,len(input_data)-1)
-    print(input_data)
+    # quickSort(input_data,0,len(input_data)-1)
+    # print(input_data)
+    sorted_data = countingSort(input_data,100)
+    print(sorted_data)
 
