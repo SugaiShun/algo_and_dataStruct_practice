@@ -6,11 +6,27 @@ id k c1 ... ckの情報が付与されたときに
 節点の情報をその番号が小さい順に出力する
 node id, parent , depth, type , c1 ... ck
 
-左子右兄弟表現(left-child, right-sibling representation)
+左子右兄弟表現(left-child, right-sibling representation)を用いる
+
 """
 from collections import namedtuple
+import dataclasses
 
-Node = namedtuple('Node',['parent','left','right'])
+
+@dataclasses.dataclass
+class Node:
+    parent:int = None
+    left:int = None
+    right:int = None
+    depth:int = 0
+
+def rec(r,d):
+    Tree[r].depth = d
+    if Tree[r].right != None:
+        rec(Tree[r].right,d)
+    if Tree[r].left != None:
+        rec(Tree[r].left,d+1)    
+
 
 if __name__ == "__main__":
     input_data = []
@@ -37,23 +53,31 @@ if __name__ == "__main__":
     input_data.append("12 0")
 
     N = len(input_data)
-    Tree = []
-    for i in range(N):
-        # 木の初期化
-        node = Node(None,None,None)
-        Tree.append(node)
-
+    # Tree = [Node()]*N
+    Tree = [ Node() for i in range(N) ]
+    
     for data_str in input_data:
         data = data_str.split()
-        tree_id = data[0]
-        tree_degree = data[1]
+        tree_id = int(data[0])
+        tree_degree = int(data[1])
 
         for i in range(tree_degree):
-            child_id = data[2+tree_degree]
-            if i == 0: 
+            child_id = int(data[2+i])
+            if i == 0:
                 Tree[tree_id].left = child_id
             else:
                 Tree[left].right = child_id
             left = child_id
             Tree[child_id].parent = tree_id
+    
+    r_index = 0
+    for i in range(N):
+    # サンプルみたいに１行目に根がくるとは限らない.
+    # そのため根を探す処理を入れる
+        if Tree[i].parent == None:
+            r_index = i
+    
+    rec(r_index,0)
+
+    print(Tree)
     
