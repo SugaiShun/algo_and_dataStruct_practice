@@ -13,8 +13,18 @@ Koch Curve
 """
 from collections import namedtuple
 import math
+import matplotlib.pyplot as plt
 
 Point = namedtuple('Point',('x','y'))
+
+PointX = []
+PointY = []
+
+def print_and_append(p:Point):
+    print(p)
+    PointX.append(p.x)
+    PointY.append(p.y)
+
 
 def koch_curve(d,p1:Point,p2:Point):
 
@@ -34,11 +44,14 @@ def koch_curve(d,p1:Point,p2:Point):
     u = Point(ux,uy)
 
     koch_curve(d-1,p1,s)
-    print(s)
+    print_and_append(s)
+
     koch_curve(d-1,s,u)
-    print(u)
+    print_and_append(u)
+
     koch_curve(d-1,u,t)
-    print(t)
+    print_and_append(t)
+
     koch_curve(d-1,t,p2)
 
     return None
@@ -52,6 +65,16 @@ print("koch curve points:")
 p1 = Point(0,0)
 p2 = Point(100,0)
 
-print(p1)
+print_and_append(p1)
+
 koch_curve(n,p1,p2)
-print(p2)
+
+print_and_append(p2)
+
+
+# グラフ描写
+plt.plot(PointX,PointY)
+plt.xlim([0,100])
+plt.ylim([0,100])
+
+plt.show()
