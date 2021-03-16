@@ -12,13 +12,13 @@ node id, parent , depth, type , c1 ... ck
 from collections import namedtuple
 import dataclasses
 
-
 @dataclasses.dataclass
 class Node:
     parent:int = None
     left:int = None
     right:int = None
     depth:int = 0
+    value:int = None
 
 def rec(r,d):
     Tree[r].depth = d
@@ -61,6 +61,7 @@ if __name__ == "__main__":
         tree_id = int(data[0])
         tree_degree = int(data[1])
 
+        Tree[tree_id].value = tree_id
         for i in range(tree_degree):
             child_id = int(data[2+i])
             if i == 0:
@@ -81,3 +82,12 @@ if __name__ == "__main__":
 
     print(Tree)
     
+    # Treeを可視化 # graphvizのインストールが必要
+    from graphviz import Digraph
+
+    g = Digraph(format='png')
+    g.attr('node', shape='circle')
+    for edge_info in Tree:
+        if edge_info.parent != None:
+            g.edge(str(edge_info.parent), str(edge_info.value))
+    g.view()
