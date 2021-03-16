@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     print(Tree)
     
-    # Treeを可視化 # graphvizのインストールが必要
+    # Treeを可視化 # graphviz
     from graphviz import Digraph
 
     g = Digraph(format='png')
