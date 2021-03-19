@@ -16,8 +16,6 @@ Postorder Tree Walk 後行順巡回
 from collections import namedtuple
 import dataclasses
 
-T = []
-
 @dataclasses.dataclass
 class Node:
     parent:int = None
