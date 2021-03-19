@@ -4,13 +4,19 @@ Binary Tree
 
 id left rightの情報が付与されたときに
 節点の情報をその番号が小さい順に出力する
-node id, parent , depth, type , c1 ... ck
+node id, parent , depth, heigth
 
-左子右兄弟表現(left-child, right-sibling representation)を用いる
-
+Preorder Tree Walk 先行順巡回
+    根節点, 左部分木, 右部分木の順番
+Inorder Tree Walk 中間順巡回
+    左部分木, 根節点, 右部分木の順番
+Postorder Tree Walk 後行順巡回
+    左部分木, 右部分木, 根節点の順番
 """
 from collections import namedtuple
 import dataclasses
+
+T = []
 
 @dataclasses.dataclass
 class Node:
@@ -40,6 +46,30 @@ def set_hegiht(r):
     Tree[r].hegiht = h1 if h1 > h2 else h2
 
     return Tree[r].hegiht
+
+def PreOrderWalk(r,walkList):
+    walkList.append(Tree[r].value)
+    if Tree[r].left != None:
+        PreOrderWalk(Tree[r].left,walkList)
+    if Tree[r].right != None:
+        PreOrderWalk(Tree[r].right,walkList)
+
+def InOrderWalk(r,walkList):    
+    if Tree[r].left != None:
+        InOrderWalk(Tree[r].left,walkList)
+
+    walkList.append(Tree[r].value)
+
+    if Tree[r].right != None:
+        InOrderWalk(Tree[r].right,walkList)
+
+def PostOrderWalk(r,walkList):    
+    if Tree[r].left != None:
+        PostOrderWalk(Tree[r].left,walkList)
+    if Tree[r].right != None:
+        PostOrderWalk(Tree[r].right,walkList)
+    walkList.append(Tree[r].value)
+
 
 
 if __name__ == "__main__":
@@ -91,7 +121,28 @@ if __name__ == "__main__":
     set_hegiht(r_index)
 
     print(Tree)
-    
+
+    walkList = []
+    PreOrderWalk(r_index,walkList)
+    print("PreOreder Walk Reslt:")
+    print(walkList)
+
+    walkList = []
+    InOrderWalk(r_index,walkList)
+    print("InOreder Walk Reslt:")
+    print(walkList)
+
+    walkList = []
+    InOrderWalk(r_index,walkList)
+    print("InOreder Walk Reslt:")
+    print(walkList)
+
+    walkList = []
+    PostOrderWalk(r_index,walkList)
+    print("PostOreder Walk Reslt:")
+    print(walkList)
+
+
     # Treeを可視化 # graphviz
     from graphviz import Digraph
 
