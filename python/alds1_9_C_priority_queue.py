@@ -20,11 +20,14 @@ right  = lambda data : int(data*2+1)
 def extract(input_data):
 
     max_key = input_data[0]
-    input_data[0] = input_data.pop(-1)
- 
-    input_data.insert(0,None)
-    maxHeapfify(input_data,1)
-    input_data.pop(0)
+    if len(input_data) > 1:
+        input_data[0] = input_data.pop(-1)
+    
+        input_data.insert(0,None)
+        maxHeapfify(input_data,1)
+        input_data.pop(0)
+    else:
+        input_data.clear()
     
     return max_key
 
@@ -72,27 +75,38 @@ if __name__ == "__main__":
     #     else:
     #         input_data.append(int(tmp))
 
-    input_data.append(4)
-    input_data.append(1)
-    input_data.append(3)
-    input_data.append(2)
-    input_data.append(16)
-    input_data.append(9)
-    input_data.append(10)
-    input_data.append(14)
-    input_data.append(8)
-    input_data.append(7)
+    # input_data.append(4)
+    # input_data.append(1)
+    # input_data.append(3)
+    # input_data.append(2)
+    # input_data.append(16)
+    # input_data.append(9)
+    # input_data.append(10)
+    # input_data.append(14)
+    # input_data.append(8)
+    # input_data.append(7)
     
-    input_data.insert(0,None)
-    N = len(input_data)
-    H = int(N/2)
-    for i in reversed(range(1,H)):
-        maxHeapfify(input_data,i)
-    input_data.pop(0)
+    # input_data.insert(0,None)
+    # N = len(input_data)
+    # H = int(N/2)
+    # for i in reversed(range(1,H)):
+    #     maxHeapfify(input_data,i)
+    # input_data.pop(0)
 
-    print(input_data)
+    # print(input_data)
 
-    insert(input_data,20)
+    input_data=[]
+
+    insert(input_data,4)
+    insert(input_data,1)
+    insert(input_data,3)
+    insert(input_data,2)
+    insert(input_data,16)
+    insert(input_data,9)
+    insert(input_data,10)
+    insert(input_data,14)
+    insert(input_data,8)
+    insert(input_data,7)
 
     print(input_data)
 
@@ -100,4 +114,4 @@ if __name__ == "__main__":
 
     print(max_key)
     print(input_data)
-    
+
