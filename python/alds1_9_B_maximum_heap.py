@@ -19,10 +19,9 @@ def maxHeapfify(input_data,i):
 
     N = len(input_data)
     large_i = i
-    if l < N:
-        if input_data[l] > input_data[large_i]: large_i = l
-    if r < N:
-        if input_data[r] > input_data[large_i] : large_i = r
+    if l < N and input_data[l] > input_data[large_i]: large_i = l
+    if r < N and input_data[r] > input_data[large_i] : large_i = r
+
 
     if large_i != i:
         tmp = input_data[large_i]
@@ -54,8 +53,7 @@ if __name__ == "__main__":
     input_data.append(7)
     
     input_data.insert(0,None)
-    N = len(input_data)
-    H = int(N/2)
+    H = int(len(input_data)/2)
     for i in reversed(range(1,H)):
         maxHeapfify(input_data,i)
     input_data.pop(0)
