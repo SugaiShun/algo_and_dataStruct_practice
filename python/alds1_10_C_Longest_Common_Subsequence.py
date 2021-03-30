@@ -56,33 +56,13 @@ def lcs_ans(X,Y):
     
     return maxl[1:]
 
-
-def lcs_original(X,Y):
-    global cnt_original
-    rslt = []
-    
-    size_X = len(X)
-    size_Y = len(Y)
-    size_XY = size_X if size_X > size_Y else size_Y
-
-    j = 0
-    for i in range(size_XY):
-
-        m_max = i+1 if i+1 <size_X else size_X
-        for m in range(j,m_max):
-            n_max = i+1 if i+1 < size_Y else size_Y
-            for n in range(j,n_max):
-                cnt_original+=1
-                if X[m] == Y[n]:
-                    rslt.append(X[m])
-                    j = i+1
-
-    return rslt
-
 if __name__ == "__main__":
 
-    input_X = ['a','b','c','b','d','a','b']
-    input_Y = ['b','d','c','a','b','a']
+    # input_X = ['a','b','c','b','d','a','b']
+    # input_Y = ['b','d','c','a','b','a']
+
+    input_X = ['c','b','a','d']
+    input_Y = ['b','d','c']
 
     # input_X = ['a','b','c']
     # input_Y = ['b','d']
