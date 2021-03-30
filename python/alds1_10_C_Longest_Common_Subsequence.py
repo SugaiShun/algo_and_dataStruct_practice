@@ -67,11 +67,6 @@ if __name__ == "__main__":
     # input_X = ['a','b','c']
     # input_Y = ['b','d']
 
-    output_Z = lcs_original(input_X,input_Y)
-
-    print("output:{}".format(output_Z))
-    print("caluculation:{}".format(cnt_original))
-
     output_Z = lcs_ans(input_X,input_Y)
     print("output:{}".format(output_Z))
     print("caluculation:{}".format(cnt_ans))
