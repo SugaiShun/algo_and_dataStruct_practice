@@ -36,9 +36,7 @@ if __name__ == "__main__":
     color = [0]*N
     distance = [0]*N
     q = originalDataStruct.queue()
-
-    nt = [0]*N
-
+    
     q.enqueue(0)
     color[0] = 1
     while not(q.is_empty()):
