@@ -2,20 +2,41 @@
 Minimum Spanning Tree
 最小全域木
 """
+
+
 def prim(M:list):
-    T = []
-
     N = len(M)
-    u = 0
-    for i in range(N):
-        for j in range(N):
-            if M[i][j] != -1:
-                u = j
-                break
-    
-    T.append(u)
 
-    return T
+    T = []
+    p = [-1]*N
+    color = [0]*N
+    INF = 100
+
+    u = 0
+
+    dis = [INF]*N
+    dis[0] = 0
+
+    while True:
+
+        min_e = INF
+        for i in range(N):
+            if dis[i] < min_e and color[i] != 2:
+                min_e = dis[i]
+                u = i
+        
+        if min_e == INF:
+            break
+
+        color[u] = 2
+
+        for j in range(N):
+            if M[u][j] != -1 and color[i] != 2 and M[u][j] < dis[j]:
+                dis[j] = M[u][j]
+                color[j] = 1
+                p[j] = u
+
+    return p
 
 if __name__=="__main__":
 
@@ -32,5 +53,4 @@ if __name__=="__main__":
 
     M = [ list(map(int,input_data.pop(0).split())) for i in range(N) ]
 
-    T = prim(M)
-    print(sum(T))
+    p = prim(M)
